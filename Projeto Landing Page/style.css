@@ -1,0 +1,142 @@
+*  {
+    margin: 0px;
+    font-family: "Inter";
+}
+
+#menuSuperior {
+    background-image: url(img/fundo-menu-superior.svg);
+    color: aliceblue;
+}
+
+#logo {
+    margin-left: 50px;
+    margin-top: 55px;
+}
+
+#titulo-menu-superior {
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+#texto-menu-superior {
+    margin-left: 100px;
+    margin-top: 25px;
+    padding-bottom: 100px;
+}
+
+#menuInformacional {
+    background-color: #EAECE5;
+    display: grid;
+    grid-auto-flow: column;
+    columns: auto;
+}
+
+.icone {
+    margin: 20px 0px 20px 100px;
+    padding: 25px;
+}
+
+.textoInformativo {
+    display: flex;
+    align-items: center;
+}
+
+#secaoVideo {
+    display: grid;
+    grid-auto-flow: column;
+    columns: auto;
+}
+
+#tituloVideo {
+    color: #247BA0;
+    margin-top: 50px;
+}
+
+#textoVideo {
+    color: #383838;
+}
+
+#video {
+    margin: 50px 10px 50px 100px; 
+}
+
+#carrosel {
+    background-color: #247BA0;
+    padding: 50px;
+}
+
+#tituloCarrosel {
+    font-size: 32px;
+    text-align: center;
+    color: #EAECE5;
+}
+
+#divCards {
+    margin-top: 25px;
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.card {
+    margin-left: 50px;
+}
+
+#setaEsquerda {
+    display: none;
+}
+
+#bruna {
+    display: none;
+}
+
+.seta {
+    margin-top: 55%;
+    cursor: pointer;
+}
+
+.seta:hover {
+    transform:translateY(-7px);
+    transition-duration: 0.5s;
+}
+
+#formulario {
+    text-align: center;
+}
+
+#tituloFormulario {
+    font-size: 30px;
+    margin: 25px;
+    color: #383838;
+}
+
+input {
+    width: 300px;
+    height: 40px;
+    background-color: #EAECE5;
+    margin: 15px;
+    border: 0;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+button {
+    background-color: #247BA0;
+    color: #FFFFFF;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bolder;
+    width: 280px;
+    height: 45px;
+    border-radius: 8px;
+    border: 0;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #29a9e0;
+    color: white;
+    transform: translateY(-7px);
+    transition-duration: 0.3s;
+    box-shadow: 0px 15px 20px #0b1a2159;
+}
