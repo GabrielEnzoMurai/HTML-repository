@@ -9,13 +9,30 @@ body {
     margin: 0;
 }
 
+button {
+    background-color: rgba(248, 70, 70, 1);
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+    padding: 8px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
 h1 {
     font-size: 64px;
     font-weight: 800;
+    margin: 0;
+}
+
+h2 {
+    font-size: 48px;
+    font-weight: 800;
+    margin: 0;
 }
 
 #presentation-container {
-    border: 1px solid black;
     padding: 40px 120px;
     height: 600px;
 }
@@ -24,4 +41,19 @@ h1 {
     width: 600px;
     position: relative;
     top: calc(50% - 145px);
+}
+
+.container {
+    padding: 160px 120px;
+    text-align: center;
+}
+
+.contact-title {
+    margin-top: 8px;
+}
+.container > p {
+    margin-top: 24px;
+}
+.container > button {
+    margin-top: 32px;
 }
