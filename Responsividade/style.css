@@ -60,6 +60,12 @@ h2 {
 }
 .container > button {
     margin-top: 2rem;
+    transition: opacity 0.5s ease-in-out, transform 0.5s .2s;;
+}
+
+.container > button:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
 }
 
 .background-gradient{
