@@ -88,3 +88,31 @@ h2 {
     background-color: rgba(248, 70, 70, 1);
     color: #fff;
 }
+
+.article-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.article-container:nth-child(even) {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.article-details {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start;
+    margin: 0 2.5rem 0 0;
+    justify-content: space-between;
+}
+
+.article-details > button {
+    font-size: 1rem;
+}
+
+.article-container:nth-child(even) > .article-details {
+    margin: 0 0 0 2.5rem;
+}
