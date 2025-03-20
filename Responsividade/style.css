@@ -39,16 +39,28 @@ h2 {
     background-image: url(./assets/background.png);
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #presentation {
     width: 37.5rem;
-    position: relative;
-    top: calc(50% - 9rem);
+}
+
+#qualities {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+}
+
+#qualities > img {
+    margin: 0 2.5rem;
 }
 
 .container {
-    padding: 10rem 7.5rem;
+    padding: 5rem 7.5rem;
     text-align: center;
 }
 
@@ -70,4 +82,9 @@ h2 {
 
 .background-gradient{
     background: linear-gradient(180deg, #fff, #d9d9d9);
+}
+
+.background-red {
+    background-color: rgba(248, 70, 70, 1);
+    color: #fff;
 }
