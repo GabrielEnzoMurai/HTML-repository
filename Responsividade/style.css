@@ -219,3 +219,63 @@ h3 {
 .company-9 {
     grid-area: 3 / 5;
 }
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    #qualities {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 4rem;
+    }
+
+    #qualities > img {
+        transform: rotate(90deg);
+        margin: 2.5rem 0;
+    }
+
+    .article-container {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .article-container:nth-child(even) {
+        flex-direction: column-reverse;
+    }
+    
+    .article-details {
+        text-align: center;
+        align-items: normal;
+        margin: 2rem 0 0 0;
+    }
+
+    .article-container:nth-child(even) > .article-details {
+        margin: 2rem 0 0 0;
+    }
+}
