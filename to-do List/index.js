@@ -4,6 +4,17 @@ let tasks = [
     { id:3, description: 'fazer o almoço', checked: false },
 ] // Array com tasks
 
+const createTaskListItem = (task, checkbox) => {
+    const list = document.getElementById('todo-list'); // Pega a lista criada no código HTML
+    const toDo = document.createElement('li'); // Cria elementos de lista
+
+    toDo.id = task.id; // Atribui na "li" o id da task em questão
+    toDo.appendChild(checkbox); // coloca a div dentro da "li"
+    list.appendChild(toDo); // coloca a "li" dentro da ul
+
+    return toDo;
+}
+
 const getCheckboxInput = ({id, description, checked}) => { // Função que recebe como parâmetro o id, description e checked
     const checkbox = document.createElement('input'); // Constante que cria um input
     const label = document.createElement('label'); // Constante que cria uma label
@@ -12,7 +23,7 @@ const getCheckboxInput = ({id, description, checked}) => { // Função que receb
 
     checkbox.type = 'checkbox'; // definindo o tipo do input
     checkbox.id = checkboxId; // id do checkbox
-    checkbox.checked = checked; // quando o checkbox for acionado
+    checkbox.checked = checked || false; // quando o checkbox for acionado
 
     label.textContent = description; // Pega a descrição da task e atribui na label
     label.htmlFor = checkboxId; // Atribui o htmlFor na label
@@ -25,17 +36,39 @@ const getCheckboxInput = ({id, description, checked}) => { // Função que receb
     return wrapper; // retorna a div
 }
 
+const getNewTaskId = () => {
+    const lastId = tasks[tasks.length - 1]?.id; // calcula o último id da lista
+    return lastId ? lastId + 1 : 1; // Retorna o última Id + 1, se não tiver nenhum retorna 1, pois será o primeiro
+}
+
+const getNewTaskData = (event) => {
+    const description = event.target.elements.description.value;  // pega a descrição do evento
+    const id = getNewTaskId(); // usa a função getNewTaskId para calcular o id da task
+
+    return { description, id }; // retorna a descrição e o Id da task
+}
+
+const createTask = (event) => {
+    event.preventDefault(); //Prevê o default do navegador
+    const newTaskData = getNewTaskData(event); // Salva em uma constante a descrição e o Id usando a função getNewTaskData
+
+    //const { id, description } = newTaskData;
+
+    const checkbox = getCheckboxInput(newTaskData) // joga os valores da nova tarefa na função que coloca ela na lista
+    createTaskListItem(newTaskData, checkbox);
+
+    tasks = [
+        ...tasks, 
+        {id: newTaskData.id, description: newTaskData.description, checked:false}
+    ]
+}
+
 window.onload = function() { // função que é carregada junto com a página
+    const form = document.getElementById('create-todo-form');
+    form.addEventListener('submit', createTask)
+
     tasks.forEach((task) => { // para cada task
         const checkbox = getCheckboxInput(task); // Constante que chama a função getCheckboxInput e passa como parâmetro a lista 
-        const list = document.getElementById('todo-list'); // Pega a lista criada no código HTML
-        const toDo = document.createElement('li'); // Cria elementos de lista
-        // const button = document.createElement('button')
-
-        toDo.id = task.id; // Atribui na "li"o id da taskem questão
-        toDo.appendChild(checkbox); // coloca a div dentro da "li"
-        // toDo.appendChild(button);
-
-        list.appendChild(toDo); // coloca a "li" dentro da ul
+        createTaskListItem(task, checkbox)
     })
 }
