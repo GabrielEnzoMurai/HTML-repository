@@ -4,12 +4,27 @@ let tasks = [
     { id:3, description: 'fazer o almoço', checked: false },
 ] // Array com tasks
 
+const removeTask = (taskId) => {
+    tasks = tasks.filter(({id}) => parseInt(id) !== parseInt(taskId)); // Filtra array, removendo a task com o id igual ao TaskId
+
+    document
+        .getElementById("todo-list") // Seleciona a "ul" elemento pai da "li"
+        .removeChild(document.getElementById(taskId)); // Remove a "li" do DOM
+}
+
 const createTaskListItem = (task, checkbox) => {
     const list = document.getElementById('todo-list'); // Pega a lista criada no código HTML
     const toDo = document.createElement('li'); // Cria elementos de lista
 
+    const removeTaskButton = document.createElement('button'); // Criando o botão
+    removeTaskButton.textContent = 'x'; // Texto do botão
+    removeTaskButton.ariaLabel = 'Remover tarefa'; // aria label do botão
+
+    removeTaskButton.onclick = () => removeTask(task.id); // No click vai executar a função que remove a tarefa
+
     toDo.id = task.id; // Atribui na "li" o id da task em questão
     toDo.appendChild(checkbox); // coloca a div dentro da "li"
+    toDo.appendChild(removeTaskButton) // coloca o botão na "li"
     list.appendChild(toDo); // coloca a "li" dentro da ul
 
     return toDo;
