@@ -12,6 +12,20 @@ const removeTask = (taskId) => {
         .removeChild(document.getElementById(taskId)); // Remove a "li" do DOM
 }
 
+const removeDoneTasks = () => {
+    const tasksToRemove = tasks
+        .filter(({checked}) => checked)
+        .map(({id}) => id)
+
+    tasks = tasks.filter(({checked}) => !checked);
+
+    tasksToRemove.forEach((tasksToRemove) => {
+        document
+            .getElementById("todo-list")
+            .removeChild(document.getElementById(tasksToRemove))
+    })
+}
+
 const createTaskListItem = (task, checkbox) => {
     const list = document.getElementById('todo-list'); // Pega a lista criada no código HTML
     const toDo = document.createElement('li'); // Cria elementos de lista
@@ -30,6 +44,16 @@ const createTaskListItem = (task, checkbox) => {
     return toDo;
 }
 
+const onCheckboxClick = (event) => {
+    const [id] = event.target.id.split('-');
+
+    tasks = tasks.map((task) => {
+        return parseInt(task.id) === parseInt(id)
+            ? {...task, checked: event.target.checked}
+            : task
+    })
+}
+
 const getCheckboxInput = ({id, description, checked}) => { // Função que recebe como parâmetro o id, description e checked
     const checkbox = document.createElement('input'); // Constante que cria um input
     const label = document.createElement('label'); // Constante que cria uma label
@@ -39,6 +63,7 @@ const getCheckboxInput = ({id, description, checked}) => { // Função que receb
     checkbox.type = 'checkbox'; // definindo o tipo do input
     checkbox.id = checkboxId; // id do checkbox
     checkbox.checked = checked || false; // quando o checkbox for acionado
+    checkbox.addEventListener('change', onCheckboxClick)
 
     label.textContent = description; // Pega a descrição da task e atribui na label
     label.htmlFor = checkboxId; // Atribui o htmlFor na label
