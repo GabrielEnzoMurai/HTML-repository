@@ -14,15 +14,15 @@ const removeTask = (taskId) => {
 
 const removeDoneTasks = () => {
     const tasksToRemove = tasks
-        .filter(({checked}) => checked)
-        .map(({id}) => id)
+        .filter(({checked}) => checked) // apenas marcadas com "checked"
+        .map(({id}) => id) // apenas o id
 
-    tasks = tasks.filter(({checked}) => !checked);
+    tasks = tasks.filter(({checked}) => !checked); // mantém as tasks não checadas
 
-    tasksToRemove.forEach((tasksToRemove) => {
+    tasksToRemove.forEach((tasksToRemove) => { // pega todas as tasks marcadas com checked
         document
-            .getElementById("todo-list")
-            .removeChild(document.getElementById(tasksToRemove))
+            .getElementById("todo-list") // pega o id da "li"
+            .removeChild(document.getElementById(tasksToRemove)) // remove ela
     })
 }
 
@@ -45,10 +45,10 @@ const createTaskListItem = (task, checkbox) => {
 }
 
 const onCheckboxClick = (event) => {
-    const [id] = event.target.id.split('-');
+    const [id] = event.target.id.split('-'); // pega apenas o id
 
     tasks = tasks.map((task) => {
-        return parseInt(task.id) === parseInt(id)
+        return parseInt(task.id) === parseInt(id) // avalia se o id é igual
             ? {...task, checked: event.target.checked}
             : task
     })
