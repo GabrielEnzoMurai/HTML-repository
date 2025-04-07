@@ -99,11 +99,16 @@ const getNewTaskData = (event) => {
     return { description, id }; // retorna a descrição e o Id da task
 }
 
-const createTask = (event) => {
-    event.preventDefault(); //Prevê o default do navegador
-    const newTaskData = getNewTaskData(event); // Salva em uma constante a descrição e o Id usando a função getNewTaskData
+const getCreatedTaskInfo = (event) => new Promise((resolve)  => { // função assíncrona que seta um time de 3seg de intervalo para cada criação de task
+    setTimeout(() => {
+        resolve(getNewTaskData(event))
+    }, 3000)
+})
 
-    //const { id, description } = newTaskData;
+const createTask = async (event) => {
+    event.preventDefault(); //Prevê o default do navegador
+    document.getElementById('save-task').setAttribute('disabled', true) // Deixa o botão desabilitado enquanto a task está sendo criada
+    const newTaskData = await getCreatedTaskInfo(event); // Salva em uma constante a descrição e o Id usando a função getNewTaskData esperando o eventoda task ser criada
 
     const checkbox = getCheckboxInput(newTaskData) // joga os valores da nova tarefa na função que coloca ela na lista
     createTaskListItem(newTaskData, checkbox);
@@ -116,6 +121,7 @@ const createTask = (event) => {
     setTaskInLocalStorage(updatedTasks)
 
     document.getElementById('description').value = ''
+    document.getElementById('save-task').removeAttribute('disabled') // Remove o atributo disable do botão
 }
 
 window.onload = function() { // função que é carregada junto com a página
