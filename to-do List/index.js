@@ -1,3 +1,20 @@
+const renderTasksProgressData = (tasks) => { // função que cria uma div(se não já existir uma) e aplica dentro do footer
+    let tasksProgress;
+    const tasksProgressDOM  = document.getElementById('tasks-progress');
+
+    if (tasksProgressDOM) tasksProgress = tasksProgressDOM;
+    else {
+        const newTasksProgressDOM = document.createElement('div');
+        newTasksProgressDOM.id = 'tasks-progress';
+        document.getElementById('todo-footer').appendChild(newTasksProgressDOM);
+        tasksProgress = newTasksProgressDOM;
+    }
+
+    const doneTasks = tasks.filter(({checked}) => checked).length // filtra o tamanho das tasks checkadas
+    const totalTasks = tasks.length; // tamanho total da lista
+    tasksProgress.textContent = `${doneTasks}/${totalTasks} concluídas` // text content
+}
+
 const getTasksFromLocalStorage = () => { // Função que serve para pegar as tasks do localStorage
     const localTasks= JSON.parse(window.localStorage.getItem('tasks')) // Como você precisa das tasks no estado Object, a função .parse tranforma do JSON para Object
     return localTasks ? localTasks : []; // Se tiver algo armazenado retorna o que está armazenado, senão retorna um array vazio
@@ -11,6 +28,7 @@ const removeTask = (taskId) => {
     const tasks = getTasksFromLocalStorage();
     const updatedTasks = tasks.filter(({id}) => parseInt(id) !== parseInt(taskId)); // Filtra array, removendo a task com o id igual ao TaskId
     setTaskInLocalStorage(updatedTasks)
+    renderTasksProgressData(updatedTasks)
 
     document
         .getElementById("todo-list") // Seleciona a "ul" elemento pai da "li"
@@ -25,6 +43,7 @@ const removeDoneTasks = () => {
 
     const updatedTasks = tasks.filter(({checked}) => !checked); // mantém as tasks não checadas
     setTaskInLocalStorage(updatedTasks)
+    renderTasksProgressData(updatedTasks)
 
     tasksToRemove.forEach((tasksToRemove) => { // pega todas as tasks marcadas com checked
         document
@@ -62,6 +81,7 @@ const onCheckboxClick = (event) => {
     })
 
     setTaskInLocalStorage(updatedTasks)
+    renderTasksProgressData(updatedTasks)
 }
 
 const getCheckboxInput = ({id, description, checked}) => { // Função que recebe como parâmetro o id, description e checked
@@ -119,6 +139,7 @@ const createTask = async (event) => {
         {id: newTaskData.id, description: newTaskData.description, checked:false}
     ]
     setTaskInLocalStorage(updatedTasks)
+    renderTasksProgressData(updatedTasks)
 
     document.getElementById('description').value = ''
     document.getElementById('save-task').removeAttribute('disabled') // Remove o atributo disable do botão
@@ -133,4 +154,6 @@ window.onload = function() { // função que é carregada junto com a página
         const checkbox = getCheckboxInput(task); // Constante que chama a função getCheckboxInput e passa como parâmetro a lista 
         createTaskListItem(task, checkbox)
     })
+
+    renderTasksProgressData(tasks)
 }
